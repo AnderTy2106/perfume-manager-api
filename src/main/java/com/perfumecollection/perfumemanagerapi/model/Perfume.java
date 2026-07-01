@@ -18,10 +18,10 @@ public class Perfume {
     private String marca;
 
     @Column(name = "MILILITROS_TOTALES")
-    private float mililitrosTotales;
+    private double mililitrosTotales;
 
     @Column(name = "MILILITROS_RESTANTES")
-    private float mililitrosRestantes;
+    private double mililitrosRestantes;
 
     @Column(name = "ENTORNO")
     @Enumerated(EnumType.STRING)
