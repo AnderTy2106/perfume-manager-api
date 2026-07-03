@@ -21,4 +21,9 @@ public class PerfumeController {
     public List<Perfume> getListaPerfume(){
         return perfumeService.listaPerfume();
     }
+
+    @GetMapping("/{id}")
+    public Perfume getPerfumePorId(@PathVariable Long id){
+        return perfumeService.buscarPorId(id);
+    }
 }

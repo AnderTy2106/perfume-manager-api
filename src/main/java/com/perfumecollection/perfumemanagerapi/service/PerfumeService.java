@@ -19,4 +19,8 @@ public class PerfumeService {
     public List<Perfume> listaPerfume(){
         return perfumeRepository.findAll();
     }
+
+    public Perfume buscarPorId(Long id){
+        return perfumeRepository.findById(id).orElse(null);
+    }
 }
