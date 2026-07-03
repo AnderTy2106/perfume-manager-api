@@ -5,6 +5,8 @@ import com.perfumecollection.perfumemanagerapi.repository.PerfumeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PerfumeService {
@@ -12,5 +14,9 @@ public class PerfumeService {
 
     public Perfume guardarPerfume(Perfume perfume){
         return perfumeRepository.save(perfume);
+    }
+
+    public List<Perfume> listaPerfume(){
+        return perfumeRepository.findAll();
     }
 }
