@@ -26,4 +26,10 @@ public class PerfumeController {
     public Perfume getPerfumePorId(@PathVariable Long id){
         return perfumeService.buscarPorId(id);
     }
+
+    @DeleteMapping("/{id}")
+    public String deletePerfumePorId(@PathVariable Long id){
+        perfumeService.eliminarPerfume(id);
+        return "Perfume eliminado correctamente";
+    }
 }

@@ -23,4 +23,8 @@ public class PerfumeService {
     public Perfume buscarPorId(Long id){
         return perfumeRepository.findById(id).orElse(null);
     }
+
+    public void eliminarPerfume(Long id){
+        perfumeRepository.deleteById(id);
+    }
 }
