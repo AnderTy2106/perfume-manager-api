@@ -27,4 +27,18 @@ public class PerfumeService {
     public void eliminarPerfume(Long id){
         perfumeRepository.deleteById(id);
     }
+
+    public Perfume actualizarPerfume(Long id, Perfume perfumeActualizado){
+        Perfume perfumeExistente = perfumeRepository.findById(id).orElse(null);
+        if (perfumeExistente != null){
+            perfumeExistente.setNombre(perfumeActualizado.getNombre());
+            perfumeExistente.setMarca(perfumeActualizado.getMarca());
+            perfumeExistente.setMililitrosTotales(perfumeActualizado.getMililitrosTotales());
+            perfumeExistente.setMililitrosRestantes(perfumeActualizado.getMililitrosRestantes());
+            perfumeExistente.setEntorno(perfumeActualizado.getEntorno());
+            return perfumeRepository.save(perfumeExistente);
+        }
+        System.out.println("No se encontró el perfume con el ID ingresado.");
+        return null;
+    }
 }

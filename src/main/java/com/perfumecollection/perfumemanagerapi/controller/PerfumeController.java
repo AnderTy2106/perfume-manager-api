@@ -32,4 +32,9 @@ public class PerfumeController {
         perfumeService.eliminarPerfume(id);
         return "Perfume eliminado correctamente";
     }
+
+    @PutMapping("/{id}")
+    public Perfume actualizarPerfumePorId(@PathVariable Long id, @RequestBody Perfume perfumeActualizado){
+        return perfumeService.actualizarPerfume(id, perfumeActualizado);
+    }
 }
