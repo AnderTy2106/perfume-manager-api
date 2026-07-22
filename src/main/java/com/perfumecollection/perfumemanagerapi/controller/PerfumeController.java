@@ -2,6 +2,7 @@ package com.perfumecollection.perfumemanagerapi.controller;
 
 import com.perfumecollection.perfumemanagerapi.model.Perfume;
 import com.perfumecollection.perfumemanagerapi.service.PerfumeService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class PerfumeController {
     private final PerfumeService perfumeService;
     @PostMapping
-    public Perfume postPerfume(@RequestBody Perfume perfume){
+    public Perfume postPerfume(@Valid @RequestBody Perfume perfume){
         return perfumeService.guardarPerfume(perfume);
     }
 
@@ -34,7 +35,7 @@ public class PerfumeController {
     }
 
     @PutMapping("/{id}")
-    public Perfume actualizarPerfumePorId(@PathVariable Long id, @RequestBody Perfume perfumeActualizado){
+    public Perfume actualizarPerfumePorId(@PathVariable Long id, @Valid @RequestBody Perfume perfumeActualizado){
         return perfumeService.actualizarPerfume(id, perfumeActualizado);
     }
 }
