@@ -1,5 +1,8 @@
 package com.perfumecollection.perfumemanagerapi.controller;
 
+import com.perfumecollection.perfumemanagerapi.dto.PerfumeRequestDTO;
+import com.perfumecollection.perfumemanagerapi.dto.PerfumeResponseDTO;
+import com.perfumecollection.perfumemanagerapi.mapper.PerfumeMapper;
 import com.perfumecollection.perfumemanagerapi.model.Perfume;
 import com.perfumecollection.perfumemanagerapi.service.PerfumeService;
 import jakarta.validation.Valid;
@@ -14,17 +17,17 @@ import java.util.List;
 public class PerfumeController {
     private final PerfumeService perfumeService;
     @PostMapping
-    public Perfume postPerfume(@Valid @RequestBody Perfume perfume){
-        return perfumeService.guardarPerfume(perfume);
+    public PerfumeResponseDTO postPerfume(@Valid @RequestBody PerfumeRequestDTO requestDTO){
+        return perfumeService.guardarPerfume(requestDTO);
     }
 
     @GetMapping
-    public List<Perfume> getListaPerfume(){
+    public List<PerfumeResponseDTO> getListaPerfume(){
         return perfumeService.listaPerfume();
     }
 
     @GetMapping("/{id}")
-    public Perfume getPerfumePorId(@PathVariable Long id){
+    public PerfumeResponseDTO getPerfumePorId(@PathVariable Long id){
         return perfumeService.buscarPorId(id);
     }
 
@@ -35,7 +38,7 @@ public class PerfumeController {
     }
 
     @PutMapping("/{id}")
-    public Perfume actualizarPerfumePorId(@PathVariable Long id, @Valid @RequestBody Perfume perfumeActualizado){
+    public PerfumeResponseDTO actualizarPerfumePorId(@PathVariable Long id, @Valid @RequestBody PerfumeRequestDTO perfumeActualizado){
         return perfumeService.actualizarPerfume(id, perfumeActualizado);
     }
 }
