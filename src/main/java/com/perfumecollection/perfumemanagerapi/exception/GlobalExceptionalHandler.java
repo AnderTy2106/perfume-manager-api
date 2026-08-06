@@ -30,4 +30,12 @@ public class GlobalExceptionalHandler {
     public String handleHttpMessageNotReadableException(HttpMessageNotReadableException exception) {
         return "Error: Formato de dato incorrecto o valor de Enum no válido";
     }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String,String> handleResourceNotFound(ResourceNotFoundException exception){
+        Map<String,String> errorResponse = new HashMap<>();
+        errorResponse.put("error", exception.getMessage());
+        return errorResponse;
+    }
 }

@@ -25,11 +25,11 @@ public class Perfume {
     private double mililitrosRestantes;
 
     @Column(name = "ENTORNO")
+    @Enumerated(EnumType.STRING)
     private Entorno entorno;
     public enum Entorno{
         OFICINA,
-        CITAS,
+        CITA,
         DIARIO
     }
-
 }

@@ -26,7 +26,7 @@ class PerfumeServiceTest {
         perfume.setMarca("Afnan");
         perfume.setMililitrosTotales(10.0);
         perfume.setMililitrosRestantes(9.5);
-        perfume.setEntorno(Perfume.Entorno.CITAS);
+        perfume.setEntorno(Perfume.Entorno.CITA);
 
         Mockito.when(perfumeRepository.save(perfume)).thenReturn(perfume);
 

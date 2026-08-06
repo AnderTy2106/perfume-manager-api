@@ -2,6 +2,7 @@ package com.perfumecollection.perfumemanagerapi.service;
 
 import com.perfumecollection.perfumemanagerapi.dto.PerfumeRequestDTO;
 import com.perfumecollection.perfumemanagerapi.dto.PerfumeResponseDTO;
+import com.perfumecollection.perfumemanagerapi.exception.ResourceNotFoundException;
 import com.perfumecollection.perfumemanagerapi.mapper.PerfumeMapper;
 import com.perfumecollection.perfumemanagerapi.model.Perfume;
 import com.perfumecollection.perfumemanagerapi.repository.PerfumeRepository;
@@ -33,12 +34,8 @@ public class PerfumeService {
     }
 
     public PerfumeResponseDTO buscarPorId(Long id){
-        Perfume perfumeEncontrado = perfumeRepository.findById(id).orElse(null);
-        if (perfumeEncontrado != null){
-            return perfumeMapper.toResponseDTO(perfumeEncontrado);
-        }
-        System.out.println("No se encontró el perfume con el ID ingresado.");
-        return null;
+        Perfume perfumeEncontrado = perfumeRepository.findById(id).orElseThrow(() ->new ResourceNotFoundException("No se encontró el perfume con el ID: " + id));
+        return perfumeMapper.toResponseDTO(perfumeEncontrado);
     }
 
     public void eliminarPerfume(Long id){
@@ -46,17 +43,13 @@ public class PerfumeService {
     }
 
     public PerfumeResponseDTO actualizarPerfume(Long id, PerfumeRequestDTO perfumeActualizado){
-        Perfume perfumeExistente = perfumeRepository.findById(id).orElse(null);
-        if (perfumeExistente != null){
-            perfumeExistente.setNombre(perfumeActualizado.getNombre());
-            perfumeExistente.setMarca(perfumeActualizado.getMarca());
-            perfumeExistente.setMililitrosTotales(perfumeActualizado.getMililitrosTotales());
-            perfumeExistente.setMililitrosRestantes(perfumeActualizado.getMililitrosRestantes());
-            perfumeExistente.setEntorno(perfumeActualizado.getEntorno());
-            perfumeRepository.save(perfumeExistente);
-            return perfumeMapper.toResponseDTO(perfumeExistente);
-        }
-        System.out.println("No se encontró el perfume con el ID ingresado.");
-        return null;
+        Perfume perfumeExistente = perfumeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No se encontró el perfume con el ID: " + id));
+        perfumeExistente.setNombre(perfumeActualizado.getNombre());
+        perfumeExistente.setMarca(perfumeActualizado.getMarca());
+        perfumeExistente.setMililitrosTotales(perfumeActualizado.getMililitrosTotales());
+        perfumeExistente.setMililitrosRestantes(perfumeActualizado.getMililitrosRestantes());
+        perfumeExistente.setEntorno(perfumeActualizado.getEntorno());
+        perfumeRepository.save(perfumeExistente);
+        return perfumeMapper.toResponseDTO(perfumeExistente);
     }
 }
