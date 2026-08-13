@@ -4,7 +4,9 @@ import com.perfumecollection.perfumemanagerapi.dto.PerfumeRequestDTO;
 import com.perfumecollection.perfumemanagerapi.dto.PerfumeResponseDTO;
 import com.perfumecollection.perfumemanagerapi.exception.ResourceNotFoundException;
 import com.perfumecollection.perfumemanagerapi.mapper.PerfumeMapper;
+import com.perfumecollection.perfumemanagerapi.model.Marca;
 import com.perfumecollection.perfumemanagerapi.model.Perfume;
+import com.perfumecollection.perfumemanagerapi.repository.MarcaRepository;
 import com.perfumecollection.perfumemanagerapi.repository.PerfumeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,9 +19,11 @@ import java.util.List;
 public class PerfumeService {
     private final PerfumeRepository perfumeRepository;
     private final PerfumeMapper perfumeMapper;
+    private final MarcaRepository marcaRepository;
 
     public PerfumeResponseDTO guardarPerfume(PerfumeRequestDTO requestDTO){
-        Perfume perfume = perfumeMapper.toEntity(requestDTO);
+        Marca marcaEncontrada = marcaRepository.findById(requestDTO.getMarcaId()).orElseThrow(()-> new ResourceNotFoundException("No se encontró la marca con el ID ingresado"));
+        Perfume perfume = perfumeMapper.toEntity(requestDTO, marcaEncontrada);
         Perfume perfumeGuardado = perfumeRepository.save(perfume);
         return perfumeMapper.toResponseDTO(perfumeGuardado);
     }
@@ -44,8 +48,9 @@ public class PerfumeService {
 
     public PerfumeResponseDTO actualizarPerfume(Long id, PerfumeRequestDTO perfumeActualizado){
         Perfume perfumeExistente = perfumeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No se encontró el perfume con el ID: " + id));
+        Marca nuevaMarca = marcaRepository.findById(perfumeActualizado.getMarcaId()).orElseThrow(() -> new ResourceNotFoundException("No se encontró la nueva marca asignada."));
         perfumeExistente.setNombre(perfumeActualizado.getNombre());
-        perfumeExistente.setMarca(perfumeActualizado.getMarca());
+        perfumeExistente.setMarca(nuevaMarca);
         perfumeExistente.setMililitrosTotales(perfumeActualizado.getMililitrosTotales());
         perfumeExistente.setMililitrosRestantes(perfumeActualizado.getMililitrosRestantes());
         perfumeExistente.setEntorno(perfumeActualizado.getEntorno());

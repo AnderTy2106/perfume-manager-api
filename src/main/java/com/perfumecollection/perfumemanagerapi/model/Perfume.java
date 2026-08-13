@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Entity(name = "PERFUME")
 @Table(name = "PERFUMES")
 @Data
@@ -15,8 +17,9 @@ public class Perfume {
     @Column(name = "NOMBRE")
     private String nombre;
 
-    @Column(name = "MARCA")
-    private String marca;
+    @ManyToOne
+    @JoinColumn(name = "marca_id")
+    private Marca marca;
 
     @Column(name = "MILILITROS_TOTALES")
     private double mililitrosTotales;

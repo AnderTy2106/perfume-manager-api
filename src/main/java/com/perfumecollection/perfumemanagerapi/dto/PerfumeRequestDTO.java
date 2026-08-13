@@ -15,8 +15,8 @@ public class PerfumeRequestDTO {
     @NotBlank(message = "El nombre del perfume es obligatorio.")
     private String nombre;
 
-    @NotBlank(message = "La marca del perfume es obligatorio.")
-    private String marca;
+    @NotNull(message = "La marca del perfume es obligatorio.")
+    private Long marcaId;
 
     @NotNull(message = "Los mililitros son requeridos")
     @DecimalMin(value = "5.0", message = "El frasco debe de tener al menos 5 ml.")
