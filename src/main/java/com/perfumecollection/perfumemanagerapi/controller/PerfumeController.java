@@ -2,8 +2,6 @@ package com.perfumecollection.perfumemanagerapi.controller;
 
 import com.perfumecollection.perfumemanagerapi.dto.PerfumeRequestDTO;
 import com.perfumecollection.perfumemanagerapi.dto.PerfumeResponseDTO;
-import com.perfumecollection.perfumemanagerapi.mapper.PerfumeMapper;
-import com.perfumecollection.perfumemanagerapi.model.Perfume;
 import com.perfumecollection.perfumemanagerapi.service.PerfumeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
