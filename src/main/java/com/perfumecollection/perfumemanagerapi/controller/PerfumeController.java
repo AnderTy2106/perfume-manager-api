@@ -2,6 +2,7 @@ package com.perfumecollection.perfumemanagerapi.controller;
 
 import com.perfumecollection.perfumemanagerapi.dto.PerfumeRequestDTO;
 import com.perfumecollection.perfumemanagerapi.dto.PerfumeResponseDTO;
+import com.perfumecollection.perfumemanagerapi.model.Perfume;
 import com.perfumecollection.perfumemanagerapi.service.PerfumeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PerfumeController {
     private final PerfumeService perfumeService;
+
     @PostMapping
     public PerfumeResponseDTO postPerfume(@Valid @RequestBody PerfumeRequestDTO requestDTO){
         return perfumeService.guardarPerfume(requestDTO);
@@ -38,5 +40,15 @@ public class PerfumeController {
     @PutMapping("/{id}")
     public PerfumeResponseDTO actualizarPerfumePorId(@PathVariable Long id, @Valid @RequestBody PerfumeRequestDTO perfumeActualizado){
         return perfumeService.actualizarPerfume(id, perfumeActualizado);
+    }
+
+    @GetMapping("/entorno/{mode}")
+    public List<PerfumeResponseDTO> getListaPerfumePorEntorno(@PathVariable("mode") Perfume.Entorno mode){
+        return perfumeService.listaPerfumePorEntorno(mode);
+    }
+
+    @GetMapping("/marca/{marcaId}")
+    public List<PerfumeResponseDTO> getPerfumePorMarca(@PathVariable Long marcaId){
+        return perfumeService.buscarPerfumePorMarca(marcaId);
     }
 }

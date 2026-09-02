@@ -57,4 +57,22 @@ public class PerfumeService {
         perfumeRepository.save(perfumeExistente);
         return perfumeMapper.toResponseDTO(perfumeExistente);
     }
+
+    public List<PerfumeResponseDTO> listaPerfumePorEntorno(Perfume.Entorno entorno){
+        List<Perfume> perfumes = perfumeRepository.findPerfumeByEntorno(entorno);
+        List<PerfumeResponseDTO> perfumesDTO = new ArrayList<>();
+        for (Perfume p : perfumes){
+            perfumesDTO.add(perfumeMapper.toResponseDTO(p));
+        }
+        return perfumesDTO;
+    }
+
+    public List<PerfumeResponseDTO> buscarPerfumePorMarca(Long marcaId){
+        List<Perfume> perfumes = perfumeRepository.findByMarcaId(marcaId);
+        List<PerfumeResponseDTO> perfumesPorMarca = new ArrayList<>();
+        for (Perfume p : perfumes){
+            perfumesPorMarca.add(perfumeMapper.toResponseDTO(p));
+        }
+        return perfumesPorMarca;
+    }
 }
