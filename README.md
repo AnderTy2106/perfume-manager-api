@@ -43,3 +43,7 @@ Una API RESTful desarrollada con **Java** y **Spring Boot** para gestionar una c
 3. **Ejecutar la aplicación:**
    
     Inicia el proyecto desde IntelliJ IDEA. La API estará disponible en http://localhost:8080.
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT - mira el archivo [LICENSE](LICENSE) para más detalles.
