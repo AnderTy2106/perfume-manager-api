@@ -9,6 +9,8 @@ import com.perfumecollection.perfumemanagerapi.model.Perfume;
 import com.perfumecollection.perfumemanagerapi.repository.MarcaRepository;
 import com.perfumecollection.perfumemanagerapi.repository.PerfumeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,13 +30,9 @@ public class PerfumeService {
         return perfumeMapper.toResponseDTO(perfumeGuardado);
     }
 
-    public List<PerfumeResponseDTO> listaPerfume(){
-        List<Perfume> perfumes = perfumeRepository.findAll();
-        List<PerfumeResponseDTO> perfumesDTO = new ArrayList<>();
-        for (Perfume p : perfumes) {
-            perfumesDTO.add(perfumeMapper.toResponseDTO(p));
-        }
-        return perfumesDTO;
+    public Page<PerfumeResponseDTO> listaPerfume(Pageable pageable){
+        Page<Perfume> perfumesPage = perfumeRepository.findAll(pageable);
+        return perfumesPage.map(perfumeMapper::toResponseDTO);
     }
 
     public PerfumeResponseDTO buscarPorId(Long id){

@@ -1,10 +1,8 @@
 package com.perfumecollection.perfumemanagerapi.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.Data;
 
-import java.util.List;
 
 @Entity(name = "PERFUME")
 @Table(name = "PERFUMES")

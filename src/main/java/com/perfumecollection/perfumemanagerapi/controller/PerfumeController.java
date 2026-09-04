@@ -6,6 +6,9 @@ import com.perfumecollection.perfumemanagerapi.model.Perfume;
 import com.perfumecollection.perfumemanagerapi.service.PerfumeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +25,8 @@ public class PerfumeController {
     }
 
     @GetMapping
-    public List<PerfumeResponseDTO> getListaPerfume(){
-        return perfumeService.listaPerfume();
+    public Page<PerfumeResponseDTO> getListaPerfume(@PageableDefault Pageable pageable){
+        return perfumeService.listaPerfume(pageable);
     }
 
     @GetMapping("/{id}")
